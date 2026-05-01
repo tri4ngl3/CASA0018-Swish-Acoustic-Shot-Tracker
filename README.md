@@ -8,8 +8,11 @@
 
 ## Introduction
 
-Tracking  statistics from regular shooting drills is a key way that bastball players measure improvement in their shot (CITATION). However, manually counting makes and misses in your head is challenging and distracts from shooting form. Existing automated solutions, such as HomeCourt and Ballogy AI, are predominately mobile apps that use computer vision. However, these require (find a link criticising these apps
+Tracking statistics from regular shooting drills is a key way that bastball players measure improvement in their shot (Cleary & Zimmerman, 2001). However, manually counting makes and misses in your head is challenging and distracts from shooting form (Maxwell et al., 2003). Existing automated solutions are predominantly comprised of wearable tech (e.g. ShotTracker) and computer vision mobile apps (e.g. HomeCourt and Ballogy). However, while these technologies effectively automate data collection, they are imperfect. Wearable tech can impact a player's shot (Li and Zhang, 2022) and vision apps require setting up a phone on a tripod, which is impractical and can be seen as invasive in public spaces (Sandbrook et al., 2018). 
 
+This project, Swish, provides an innovation on existing solutions by using embedded machine learning (TinyML) to listen to the sound of shots and automatically classify makes and misses. By using audio, Swish bypasses the need for invasive filming or wearable hardware, providing a portable device that can be placed discretely under the rim, leaving the athlete to focus on their shot.
+
+(insert diagram image of swish under the rim)
 
 - an overview of what the project does
 - your inspiration for making the project 
@@ -37,6 +40,8 @@ This is a Deep Learning project! What model architecture did you use? Did you tr
 ## Experiments
 What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
 
+Run a deployment accuracy test??
+
 *Tip: probably ~300 words and graphs and tables are usually good to convey your results!*
 
 ## Results and Observations
@@ -55,6 +60,15 @@ Wrap it up, summarising key findings.
 1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
 
 2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
+
+https://www.fatherly.com/gear/shottracker-wearable-basketball-sensor
+https://www.homecourt.ai/
+https://www.ballogy.com/
+
+Cleary, T. J., & Zimmerman, B. J. (2001). Self-regulation differences during athletic practice by experts, non-experts, and novices. Journal of applied sport psychology, 13(2), 185-206.
+Sandbrook, C., Luque-Lora, R., & Adams, W. M. (2018). Human bycatch: Conservation surveillance and the social implications of camera traps. Conservation and Society, 16(4), 493-504.
+Maxwell, J. P., Masters, R. S., & Eves, F. F. (2003). The role of working memory in motor learning and performance. Consciousness and Cognition, 12(3), 376-402.
+Li, S., & Zhang, W. (2022). Evaluation Method of Basketball Teaching and training effect based on Wearable device. Frontiers in Physics, 10, 900169.
 
 *Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
 
