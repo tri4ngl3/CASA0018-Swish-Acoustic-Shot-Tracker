@@ -15,9 +15,15 @@ This project, Swish, overcomes these problems by using embedded machine learning
 (insert diagram image of swish under the rim)
 
 ## Application Overview
-Thinking back to the various application diagrams you have seen through the module - how would you describe an overview of the building blocks of your project - how do they connect, what do the component parts include.
+
+
+
+![Block diagram showing the flow of data through the Swish system](report_figures/application_diagram.png
+
+
 
 *Tip: probably ~200 words and a diagram is usually good to convey your design!*
+
 
 ## Data
 Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
