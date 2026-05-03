@@ -43,12 +43,15 @@ In order to correct class imbalance that skewed model predictions, misses were d
 
 **Figure 4.** *MFE spectrograms illustrating the distinct acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
 
-## Model
+## Model & Experiments
+### Model Architecture
+### Edge Optimisation
+### Real-World Validation
+
 This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
 
 *Tip: probably ~200 words and a diagram is usually good to describe your model!*
 
-## Experiments
 What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
 
 Run a deployment accuracy test??
