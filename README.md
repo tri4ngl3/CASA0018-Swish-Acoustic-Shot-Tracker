@@ -46,7 +46,7 @@ In order to correct class imbalance that skewed model predictions, misses were d
 
 Deploying deep learning models on microcontroller means navigating the inherent trade-off balance between classification accuracy and processing efficiency.
 
-To determine the optimal topology for my device, I initially experimented with three model architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). 
+To determine the optimal topology for my device, I initially experimented with three model architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent all models from overfitting, a high dropout rate was used between dense layers and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
 
 <div align="center">
 
@@ -58,10 +58,13 @@ To determine the optimal topology for my device, I initially experimented with t
 
 </div>
 
-**Table 1.** *Performance metrics across evaluated neural network architectures.*
+**Table 1.** *Performance metrics across neural network architectures.*
 
-The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs both performed well with the 2D slightly outperforming the 1D offered strong efficiency by sliding its kernel strictly across the time axis, resulting in a highly optimized inference latency of just 13 ms.
+The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. [could include why] 
 
+However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 144 ms. To navigate this accuracy-latency trade-off, I had to think about my specific application. For this device to function effectively as a basketball shot tracker it would need to be highly accurate to track the minute improvements in shooting percentages that basketball players experience as they train. Therefore, the 2D model was selected, as the accuracy of the 1D achitecture was insufficient. However, committing to this computationally heavier architecture necessitated upstream optimization of the MFE processing block to ensure that total system latency remained below the 500 ms inference stride.
+
+(improve and polish above para)
 
 ### Edge Optimisation
 
