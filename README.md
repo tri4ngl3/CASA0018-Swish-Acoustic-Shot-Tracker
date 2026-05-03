@@ -18,7 +18,7 @@ This project, Swish, overcomes these problems by using embedded machine learning
 
 
 
-![Block diagram showing the flow of data through the Swish system](report_figures/application_diagram.png
+![Block diagram showing the flow of data through the Swish system](report_figures/casa_report_graphic.png
 
 
 
