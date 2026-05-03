@@ -12,7 +12,7 @@ Tracking statistics from regular shooting drills is a key method that basketball
 
 This project, Swish, overcomes these problems by using machine learning to classify shots based on the sound of ball-basket interactions. By using audio, Swish bypasses the need for invasive filming or wearable hardware, providing a portable device that can be placed discretely under the rim, leaving the athlete to focus on their shot.
 
-(insert diagram image of swish under the rim)
+**Figure 1.** *INSERT diagram image of swish under the rim!!*
 
 ## Application Overview
 
@@ -30,7 +30,8 @@ Initially, data collection was carried out using the Arduino and Edge Impulse's 
 
 To streamline data annotation, delayed audio-tagging was used, whereby the class label was stated aloud following a pause after each shot. In Audacity, 1.5 second windows were labelled and audio tags removed in an efficient workflow that enabled the extraction of 1,509 data points total, including 353 makes, 572 misses and 584 background noise windows. 
 
-Figure 3. Image showing data labelling on audacity
+![Image showing Audacity labelling system](report_figures/audacity_casa_diag.png)
+**Figure 3.** *Audacity workspace demonstrating the manual audio annotation workflow. Over 2.5 hours of continuous raw shooting audio was segmented into discrete class windows using this method. Noise segments were intentionally left longer, allowing the Edge Impulse pipeline to automatically partition them into multiple 1.5-second windows.*
 
 In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
 
