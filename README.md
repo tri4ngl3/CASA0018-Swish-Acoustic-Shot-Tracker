@@ -21,7 +21,8 @@ The Swish system employs an edge-computing architecture to process environmental
 Each window is processed through a Mel-filterbank energy (MFE) digital signal processing (DSP) block to convert the audio data into a 2D feature map. This is then passed to a quantised Convolutional Neural Network (CNN) classifier, which generates confidence scores for three target classes: make, miss, and noise. An algorithm then identifies the class with the highest score that exceeds the precision-recall tuned confidence threshold. If the window is classified as noise, the device continues listening. However, if a make or a miss is detected, then the respective event is recorded and a 2-second refractory period is initiated to prevent duplicate classifications. The onboard RGB LED then changes from blue, which indicates the device is listening, to red for a miss or green for a make. Shooting statistics are stored in local memory. This data can then be retrieved at the end of a session by connecting via a Bluetooth Low Energy (BLE) UART text interface that links the user's smartphone to the device using the Serial Bluetooth Terminal app.
 
 ![Block diagram showing the flow of data through the Swish system](report_figures/swish_application_graphic.png)
-**Figure 2.** *Block diagram detailing the Swish system architecture and data processing pipeline.*
+
+**Figure 2.** *The Swish system architecture and data processing pipeline.*
 
 ## Data
 Due to a scarcity of publicly available datasets for acoustic basketball shot classification, a custom dataset was constructed by recording shot audio at my local court. This ensured the training data was tailored to the intended deployment environment, capturing audio with a spatial arrangement relevant to device use by recording from the ground underneath the backboard.
@@ -36,8 +37,9 @@ To streamline data annotation, delayed audio-tagging was used, whereby the class
 
 In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
 
-![Diagram showing MFE spectrograms of different shots](report_figures/shot_MFE_spectrograms_diagram.png)
-**Figure 4.** *Diagram showing the MFE spectrograms illustrating the distinct acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
+<img src="report_figures/shot_MFE_spectrograms_diagram.png" alt="Diagram showing MFE spectrograms of different shots" width="50%">
+
+**Figure 4.** *MFE spectrograms illustrating the distinct acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
 
 ## Model
 This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
