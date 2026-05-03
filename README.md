@@ -44,6 +44,24 @@ In order to correct class imbalance that skewed model predictions, misses were d
 ## Model & Experiments
 ### Model Architecture
 
+Deploying deep learning models on microcontroller means navigating the inherent trade-off balance between classification accuracy and processing efficiency.
+
+To determine the optimal topology for my device, I initially experimented with three model architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). 
+
+<div align="center">
+
+| Model Architecture | Validation Accuracy | Test Accuracy | Test F1 Score | Inference Latency |
+| :--- | :--- | :--- | :--- | :--- |
+| **Dense (DNN)** | 60.3% | 53.38% | 0.53 | 10 ms |
+| **1D CNN** | 86.4% | 78.70% | 0.91 | 13 ms |
+| **2D CNN** | 87.7% | 83.46% | 0.92 | 144 ms |
+
+</div>
+
+**Table 1.** *Performance metrics across evaluated neural network architectures.*
+
+The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs both performed well with the 2D slightly outperforming the 1D offered strong efficiency by sliding its kernel strictly across the time axis, resulting in a highly optimized inference latency of just 13 ms.
+
 
 ### Edge Optimisation
 
