@@ -34,7 +34,8 @@ Figure 3. Image showing data labelling on audacity
 
 In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
 
-Figure 4. Image showing difference between MFE spectrogram for a swish, unclean make and miss.
+![Diagram showing MFE spectrograms of different shots](report_figures/shot_MFE_spectrograms_diagram.png)
+**Figure 2.** *Diagram showing the MFE spectrograms for audio windows from different events: a clean swish make, an unclean make, a miss and background noise of a player bouncing the ball.*
 
 ## Model
 This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
