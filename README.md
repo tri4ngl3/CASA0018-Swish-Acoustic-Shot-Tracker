@@ -26,7 +26,7 @@ Each window is processed through a Mel-filterbank energy (MFE) digital signal pr
 ## Data
 Due to a scarcity of publicly available datasets for acoustic basketball shot classification, a custom dataset was constructed by recording shot audio at my local court. This ensured the training data was tailored to the intended deployment environment, capturing audio with a spatial arrangement relevant to device use by recording from the ground underneath the backboard.
 
-Initally, data collection was carried out using the Arduino and Edge Impulse's (EI) labelling feature. However, this was abandoned due to restrictive 20-second recording limits and inefficient labelling workflow on EI. Instead, continuous shooting sessions, in which a diverse range of shots were taken, were recorded on a smartphone using the RecForge app. This app enabled me to record high resolution wav files and to mimic the Arduino mic's acoustic profile by disabling automatic gain control and using a single mic. Files were downsampled to 16,000 Hz (16 kHz) and noise was artifically added on EI to further mimic the arduino mic.
+Initially, data collection was carried out using the Arduino and Edge Impulse's (EI) labelling feature. However, this was abandoned due to restrictive 20-second recording limits and inefficient labelling workflow on EI. Instead, continuous shooting sessions, in which a diverse range of shots were taken, were recorded on a smartphone using the RecForge app. This app enabled me to record high resolution wav files and to mimic the Arduino mic's acoustic profile by disabling automatic gain control and using a single mic. Files were downsampled to 16,000 Hz (16 kHz) and noise was artificially added on EI to further mimic the arduino mic.
 
 To streamline data annotation, delayed audio-tagging was used, whereby the class label was stated aloud following a pause after each shot. In Audacity, 1.5 second windows were labelled and audio tags removed in an efficient workflow that enabled the extraction of 1,509 data points total, including 353 makes, 572 misses and 584 background noise windows. 
 
@@ -35,9 +35,6 @@ Figure 3. Image showing data labelling on audacity
 In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
 
 Figure 4. Image showing difference between MFE spectrogram for a swish, unclean make and miss.
-
-
-*Tip: probably ~200 words and images of what the data 'looks like' are good!*
 
 ## Model
 This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
