@@ -1,0 +1,25 @@
+Creating job... OK (ID: 47946743)
+
+✔️ Job scheduled at 03 May 2026 14:33:30
+✔️ Job started at 03 May 2026 14:33:33
+
+Generating features for MFE...
+Not generating new features: features already generated and no options or files have changed.
+Generating features for MFE OK
+
+Classifying data for Classifier...
+Classifying data for float32 model...
+Classifying data for int8 model...
+✔️ Job scheduled at 03 May 2026 14:33:43
+✔️ Job started at 03 May 2026 14:33:44
+[spinner-done] Job scheduled at 03 May 2026 14:33:43
+[spinner-done] Job started at 03 May 2026 14:33:44
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+Classifying data for Classifier OK
+
+Generating model testing summary...
+
+Finished generating model testing summary
+
+Job completed (success)
