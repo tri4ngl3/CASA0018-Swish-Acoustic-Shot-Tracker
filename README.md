@@ -38,7 +38,7 @@ To streamline data annotation, delayed audio-tagging was used, whereby the class
 In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
 
 <div align="center">
-  <img src="report_figures/shot_MFE_spectrograms_diagram.png" alt="Diagram showing MFE spectrograms of different shots" width="65%">
+  <img src="report_figures/shot_MFE_spectrograms_diagram.png" alt="Diagram showing MFE spectrograms of different shots" width="60%">
 </div>
 
 **Figure 4.** *MFE spectrograms illustrating the distinct acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
