@@ -1,4 +1,4 @@
-# Swish: Real-Time Acoustic Classification of Basketball Shots using TinyML
+# Swish: Acoustic Classification of Basketball Shots using TinyML
 
 **Author**: Elliot Hills
 
