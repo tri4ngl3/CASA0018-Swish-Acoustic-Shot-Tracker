@@ -17,11 +17,11 @@ This project, Swish, overcomes these problems by using machine learning to class
 
 <div align="center">
 
-<img src="path/to/your/combined_figure_1.jpg" alt="System overview of the Swish TinyML shot tracker showing both court placement and hardware close-up." width="100%">
+<img src="path/report_figures/dual_swish_diagram.png" alt="Overview of Swish showing both court placement and hardware close-up." width="100%">
 
 </div>
 
-**Figure 1.** _The Swish shot tracker. **(A)** The Swish device positioned on the ground off the court beneath the basketball hoop for convinience and to capture the sound of the net. **(B)** Close-up of the assembled prototype detailing the components: (a) the **Arduino Nano 33 BLE Sense microcontroller**, (b) the **5V rechargeable battery**, (c) the **MP34DT05 microphone**, (d) the **RGB LED**, (e) the **custom fabric securement sleeve**, and (f) the **USB power cord** connecting the battery supply to the board._
+**Figure 1.** _The Swish shot tracker. **(A)** Deployment context. Positioning of the Swish sensor on the ground behind the court perimeter, beneath the hoop is shown. As well as the primary acoustic target zone (rim and net) and the downward propagation of sound to the microphone **(B)** Close-up of the assembled prototype detailing the components: (a) the **Arduino Nano 33 BLE Sense microcontroller**, (b) the **5V rechargeable battery**, (c) the **MP34DT05 microphone**, (d) the **RGB LED**, (e) the **custom fabric securement sleeve**, and (f) the **USB power cord** connecting the battery supply to the board._
 
 ## Application Overview
 The Swish system employs an edge-computing architecture to process environmental audio locally in real-time. The hardware is lightweight and pocket-sized, simply consisting of an Arduino Nano 33 BLE Sense secured to a portable battery. Audio is continuously captured via the onboard MP34DT05 microphone and partitioned using a 1.5-second sliding window with a 0.5-second inference stride. 
