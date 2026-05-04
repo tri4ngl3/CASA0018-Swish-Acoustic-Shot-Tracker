@@ -98,42 +98,19 @@ Ultimately, the DSP resolution downgrade was selected as the optimal deployment 
 
 ### Real-World Validation
 
+### Real-World Validation Results
+
 <div align="center">
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Predicted: Make</th>
-      <th>Predicted: Miss</th>
-      <th>Predicted: Noise</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><b>Actual: Make</b></td>
-      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
-      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
-      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
-    </tr>
-    <tr>
-      <td><b>Actual: Miss</b></td>
-      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
-      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
-      <td bgcolor="#fff3cd"><i>[XX]</i></td> <!-- Orange -->
-    </tr>
-    <tr>
-      <td><b>Actual: Noise</b></td>
-      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
-      <td bgcolor="#fff3cd"><i>[XX]</i></td> <!-- Orange -->
-      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
-    </tr>
-  </tbody>
-</table>
+| | Predicted: Make | Predicted: Miss | Predicted: Noise |
+| :--- | :--- | :--- | :--- |
+| **Actual: Make** | 🟩 *[XX]* | 🟥 *[XX]* | 🟥 *[XX]* |
+| **Actual: Miss** | 🟥 *[XX]* | 🟩 *[XX]* | 🟨 *[XX]* |
+| **Actual: Noise**| 🟥 *[XX]* | 🟨 *[XX]* | 🟩 *[XX]* |
 
 </div>
 
-**Table 3.** *Confusion matrix detailing the real-world classification performance across 60 discrete acoustic events.*
+**Table 3.** *Confusion matrix of the real-world classification performance across 60 acoustic events.*
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
