@@ -110,7 +110,7 @@ Ultimately, the DSP resolution downgrade was selected as the optimal deployment 
 
 </div>
 
-**Table 3.** *Confusion matrix of the real-world classification performance across 60 acoustic events.*
+**Table 3.** *Confusion matrix of the real-world classification performance across 100 acoustic events.*
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
