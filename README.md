@@ -44,9 +44,9 @@ In order to correct class imbalance that skewed model predictions, misses were d
 ## Model & Experiments
 ### Model Architecture
 
-Deploying deep learning models on microcontroller means navigating the inherent trade-off balance between classification accuracy and processing efficiency.
+Contructing a TinyML model means navigating the inherent trade-off balance between classification accuracy and processing efficiency (Lin et al., 2020).
 
-To determine the optimal topology for my device, I initially experimented with three model architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent all models from overfitting, a high dropout rate was used between dense layers and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
+To determine the optimal model for my device, I initially experimented with three architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent all models from overfitting, a high dropout rate was used between dense layers and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
 
 <div align="center">
 
@@ -60,13 +60,26 @@ To determine the optimal topology for my device, I initially experimented with t
 
 **Table 1.** *Performance metrics across neural network architectures.*
 
-The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. [could include why] 
+The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. [could include why] However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 306 ms. 
 
-However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 144 ms. To navigate this accuracy-latency trade-off, I had to think about my specific application. For this device to function effectively as a basketball shot tracker it would need to be highly accurate to track the minute improvements in shooting percentages that basketball players experience as they train. Therefore, the 2D model was selected, as the accuracy of the 1D achitecture was insufficient. However, committing to this computationally heavier architecture necessitated upstream optimization of the MFE processing block to ensure that total system latency remained below the 500 ms inference stride.
+Navigating this accuracy-latency trade-off required prioritizing the specific functionality the application. To operate effectively as a shot tracker, Swish must have a high classification accuracy to reliably capture the minute, incremental improvements a player makes to their shooting percentage over time. As a result, the 1D architecture was deemed insufficiently accurate for the use case and it was decided that the 2D CNN should be used, with further system optimisation carried out to ensure total latency remained below the 500 ms inference stride.
 
 (improve and polish above para)
 
 ### Edge Optimisation
+
+<div align="center">
+
+| Experiment | Parameter Adjusted | Processing Latency | Inference Latency | Total Latency | Test Accuracy |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Baseline** | None (16KHz, 40 Filters, 512 FFT, 0.01s Stride) | 763 ms | 306 ms | 1,069 ms | 83.46% |
+| **Downsampling** | Sample Rate: 16KHz &rarr; 8KHz | 733 ms | 274 ms | 1,007 ms | 77.19% |
+| **Time Resolution** | Frame Stride: 0.01s &rarr; 0.02s | 381 ms | 100 ms | 481 ms | 76.60% |
+| **DSP Resolution** | Filters: 40 &rarr; 20, FFT: 512 &rarr; 256 | 386 ms | 105 ms | **491 ms** | **79.20%** |
+
+</div>
+
+**Table 2.** *Impact of MFE processing block optimizations on system latency and test accuracy.*
 
 ### Real-World Validation
 
@@ -105,6 +118,7 @@ Cleary, T. J., & Zimmerman, B. J. (2001). Self-regulation differences during ath
 Sandbrook, C., Luque-Lora, R., & Adams, W. M. (2018). Human bycatch: Conservation surveillance and the social implications of camera traps. Conservation and Society, 16(4), 493-504.
 Moreira, P. E. D., Dieguez, G. T. D. O., Bredt, S. D. G. T., & Praça, G. M. (2021). The acute and chronic effects of dual-task on the motor and cognitive performances in athletes: a systematic review. International journal of environmental research and public health, 18(4), 1732.
 Li, S., & Zhang, W. (2022). Evaluation Method of Basketball Teaching and training effect based on Wearable device. Frontiers in Physics, 10, 900169.
+Lin, J., Chen, W. M., Lin, Y., Gan, C., & Han, S. (2020). Mcunet: Tiny deep learning on iot devices. Advances in neural information processing systems, 33, 11711-11722.
 
 *Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
 
