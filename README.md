@@ -98,15 +98,42 @@ Ultimately, the DSP resolution downgrade was selected as the optimal deployment 
 
 ### Real-World Validation
 
-This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
+<div align="center">
 
-*Tip: probably ~200 words and a diagram is usually good to describe your model!*
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Predicted: Make</th>
+      <th>Predicted: Miss</th>
+      <th>Predicted: Noise</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Actual: Make</b></td>
+      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
+      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
+      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
+    </tr>
+    <tr>
+      <td><b>Actual: Miss</b></td>
+      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
+      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
+      <td bgcolor="#fff3cd"><i>[XX]</i></td> <!-- Orange -->
+    </tr>
+    <tr>
+      <td><b>Actual: Noise</b></td>
+      <td bgcolor="#f8d7da"><i>[XX]</i></td> <!-- Red -->
+      <td bgcolor="#fff3cd"><i>[XX]</i></td> <!-- Orange -->
+      <td bgcolor="#d4edda"><i>[XX]</i></td> <!-- Green -->
+    </tr>
+  </tbody>
+</table>
 
-What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
+</div>
 
-Run a deployment accuracy test??
-
-*Tip: probably ~300 words and graphs and tables are usually good to convey your results!*
+**Table 3.** *Confusion matrix detailing the real-world classification performance across 60 discrete acoustic events.*
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
