@@ -17,7 +17,7 @@ This project, Swish, overcomes these problems by using machine learning to class
 
 <div align="center">
 
-<img src="path/report_figures/dual_swish_diagram.png" alt="Overview of Swish showing both court placement and hardware close-up." width="100%">
+<img src="main/report_figures/dual_swish_diagram.png" alt="Overview of Swish showing both court placement and hardware close-up." width="100%">
 
 </div>
 
