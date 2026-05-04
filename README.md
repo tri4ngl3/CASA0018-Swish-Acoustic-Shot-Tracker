@@ -10,6 +10,10 @@
 
 **GitHub Repo:** https://github.com/tri4ngl3/CASA0018-Swish-Acoustic-Shot-Tracker/
 
+**Experiment Logs, Code and Stats:** https://github.com/tri4ngl3/CASA0018-Swish-Acoustic-Shot-Tracker/experiment_logs_code_and_stats
+
+**Deployment Code:** https://github.com/tri4ngl3/CASA0018-Swish-Acoustic-Shot-Tracker/deployment_code
+
 ## Introduction
 Tracking statistics from regular shooting drills is a key method that basketball players use to measure improvement in their shot (Cleary & Zimmerman, 2001). However, mentally tracking makes and misses is challenging and distracts from shooting form, as it creates a cognitive-motor dual-task that impairs performance (Moreira et al., 2021). Existing automated solutions predominantly consist of wearable tech (e.g. ShotTracker) and computer vision mobile apps (e.g. HomeCourt and Ballogy). However, while these technologies effectively automate data collection, they are imperfect. Wearable tech can impact a player's shot (Li and Zhang, 2022) and vision apps require setting up a phone on a tripod, which is impractical and can be seen as invasive in public spaces due to human by-catch (Sandbrook et al., 2018). 
 
