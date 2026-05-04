@@ -2,7 +2,7 @@
 
 **Author**: Elliot Hills
 
-**Edge Impulse:** https://studio.edgeimpulse.com/public/92154/latest
+**Edge Impulse:** https://studio.edgeimpulse.com/public/979083/latest
 
 **GitHub Repo:** https://github.com/mandymadongyi/Baby-Cry-Detector-CASA0018
 
@@ -62,24 +62,35 @@ To determine the optimal model for my device, I initially experimented with thre
 
 The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. [could include why] However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 306 ms. 
 
-Navigating this accuracy-latency trade-off required prioritizing the specific functionality the application. To operate effectively as a shot tracker, Swish must have a high classification accuracy to reliably capture the minute, incremental improvements a player makes to their shooting percentage over time. As a result, the 1D architecture was deemed insufficiently accurate for the use case and it was decided that the 2D CNN should be used, with further system optimisation carried out to ensure total latency remained below the 500 ms inference stride.
-
-(improve and polish above para)
+Navigating this accuracy-latency trade-off required prioritizing the specific functionality of the application. To operate effectively as a shot tracker, Swish must have a high classification accuracy to reliably capture the minute, incremental improvements a player makes to their shooting percentage over time. As a result, the 1D architecture was deemed insufficiently accurate for the use case and it was decided that the 2D CNN should be used, so long as further system optimisation could ensure total latency remained below the 500 ms inference stride.
 
 ### Edge Optimisation
+
+In the baseline system using auto-tuned parameters from Edge Impulse (16KHz, 40 filters, 512 FFT length, 0.01s stride), the MFE processing block had a high latency of 763 ms. Combined with the 306 ms inference time, the total pipeline latency far exceeded the 500 ms inference stride constraint at 1,069 ms.
+
+To resolve this, three experiments were run to evaluate the effect of downgrading parameters (Table 2): 
+1. Downsampling the audio sample rate
+2. Reducing the temporal resolution
+3. Reducing the DSP frequency resolution
+
+Downgrading these parameters reduces the computational load of feature extraction and shrinks the output spectrogram dimensions, creating a subsequent reduction in downstream inference latency. However, it also reduces model accuracy.
 
 <div align="center">
 
 | Experiment | Parameter Adjusted | Processing Latency | Inference Latency | Total Latency | Test Accuracy |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Baseline** | None (16KHz, 40 Filters, 512 FFT, 0.01s Stride) | 763 ms | 306 ms | 1,069 ms | 83.46% |
-| **Downsampling** | Sample Rate: 16KHz &rarr; 8KHz | 733 ms | 274 ms | 1,007 ms | 77.19% |
-| **Time Resolution** | Frame Stride: 0.01s &rarr; 0.02s | 381 ms | 100 ms | 481 ms | 76.60% |
+| **Baseline** | None (16KHz, 40 filters, 512 FFT, 0.01s stride) | 763 ms | 306 ms | 1,069 ms | 83.46% |
+| **Downsampling** | Sample rate: 16KHz &rarr; 8KHz | 733 ms | 274 ms | 1,007 ms | 77.19% |
+| **Time Resolution** | Frame stride: 0.01s &rarr; 0.02s | 381 ms | 100 ms | 481 ms | 76.60% |
 | **DSP Resolution** | Filters: 40 &rarr; 20, FFT: 512 &rarr; 256 | 386 ms | 105 ms | **491 ms** | **79.20%** |
 
 </div>
 
 **Table 2.** *Impact of MFE processing block optimizations on system latency and test accuracy.*
+
+Downsampling to 8KHz provided a negligible latency improvement, while degrading accuracy. Conversely, decreasing the temporal resolution by doubling the frame stride successfully reduced total latency to below 500 ms at 481 ms, but had significantly reduced accuracy (76.60%).
+
+Ultimately, the DSP resolution downgrade was selected as the optimal deployment configuration. By reducing the number of mel-filters to 20 and halving the FFT length to 256, the vertical frequency resolution of the spectrogram was compressed. This achieved a total latency of 491 ms, while retaining a high test accuracy (79.20%).
 
 ### Real-World Validation
 
