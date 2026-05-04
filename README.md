@@ -11,7 +11,7 @@
 **GitHub Repo:** https://github.com/tri4ngl3/CASA0018-Swish-Acoustic-Shot-Tracker/
 
 ## Introduction
-Tracking statistics from regular shooting drills is a key method that basketball players use to measure improvement in their shot (Cleary & Zimmerman, 2001). However, mentally tracking makes and misses is challenging and distracts from shooting form, as it creates a cognitive-motor dual-task that inherently impairs performance (Moreira et al., 2021). Existing automated solutions predominantly consist of wearable tech (e.g. ShotTracker) and computer vision mobile apps (e.g. HomeCourt and Ballogy). However, while these technologies effectively automate data collection, they are imperfect. Wearable tech can impact a player's shot (Li and Zhang, 2022) and vision apps require setting up a phone on a tripod, which is impractical and can be seen as invasive in public spaces due to human by-catch (Sandbrook et al., 2018). 
+Tracking statistics from regular shooting drills is a key method that basketball players use to measure improvement in their shot (Cleary & Zimmerman, 2001). However, mentally tracking makes and misses is challenging and distracts from shooting form, as it creates a cognitive-motor dual-task that impairs performance (Moreira et al., 2021). Existing automated solutions predominantly consist of wearable tech (e.g. ShotTracker) and computer vision mobile apps (e.g. HomeCourt and Ballogy). However, while these technologies effectively automate data collection, they are imperfect. Wearable tech can impact a player's shot (Li and Zhang, 2022) and vision apps require setting up a phone on a tripod, which is impractical and can be seen as invasive in public spaces due to human by-catch (Sandbrook et al., 2018). 
 
 This project, Swish, overcomes these problems by using machine learning to classify shots based on the sound of ball-basket interactions. By using audio, Swish bypasses the need for invasive filming or wearable hardware, providing a portable device that can be placed discretely under the rim, leaving the athlete to focus on their shot.
 
@@ -103,8 +103,6 @@ Downsampling to 8KHz provided a negligible latency improvement, while degrading 
 Ultimately, the DSP resolution downgrade was selected as the optimal deployment configuration. By reducing the number of mel-filters to 20 and halving the FFT length to 256, the vertical frequency resolution of the spectrogram was compressed. This achieved a total latency of 491 ms, while retaining a high test accuracy (79.20%).
 
 ### Real-World Validation
-
-### Real-World Validation Results
 
 <div align="center">
 
