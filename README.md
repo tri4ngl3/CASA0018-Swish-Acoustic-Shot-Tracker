@@ -15,7 +15,13 @@ Tracking statistics from regular shooting drills is a key method that basketball
 
 This project, Swish, overcomes these problems by using machine learning to classify shots based on the sound of ball-basket interactions. By using audio, Swish bypasses the need for invasive filming or wearable hardware, providing a portable device that can be placed discretely under the rim, leaving the athlete to focus on their shot.
 
-**Figure 1.** *INSERT diagram image of swish under the rim!!*
+<div align="center">
+
+<img src="path/to/your/combined_figure_1.jpg" alt="System overview of the Swish TinyML shot tracker showing both court placement and hardware close-up." width="100%">
+
+</div>
+
+**Figure 1.** _The Swish shot tracker. **(A)** The Swish device positioned on the ground off the court beneath the basketball hoop for convinience and to capture the sound of the net. **(B)** Close-up of the assembled prototype detailing the components: (a) the **Arduino Nano 33 BLE Sense microcontroller**, (b) the **5V rechargeable battery**, (c) the **MP34DT05 microphone**, (d) the **RGB LED**, (e) the **custom fabric securement sleeve**, and (f) the **USB power cord** connecting the battery supply to the board._
 
 ## Application Overview
 The Swish system employs an edge-computing architecture to process environmental audio locally in real-time. The hardware is lightweight and pocket-sized, simply consisting of an Arduino Nano 33 BLE Sense secured to a portable battery. Audio is continuously captured via the onboard MP34DT05 microphone and partitioned using a 1.5-second sliding window with a 0.5-second inference stride. 
