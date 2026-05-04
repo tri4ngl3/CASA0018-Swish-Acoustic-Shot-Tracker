@@ -1,4 +1,6 @@
-![Swish Logo](report_figures/swish_logo.png)
+<div align="left">
+  <img src="report_figures/swish_logo.png" alt="DSwish Logo" width="20%">
+</div>
 
 # Acoustic Classification of Basketball Shots using TinyML
 
