@@ -1,4 +1,6 @@
-# Swish: Acoustic Classification of Basketball Shots using TinyML
+![Swish Logo](report_figures/swish_logo.png)
+
+# Acoustic Classification of Basketball Shots using TinyML
 
 **Author**: Elliot Hills
 
