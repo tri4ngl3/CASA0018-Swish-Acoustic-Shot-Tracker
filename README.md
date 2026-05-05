@@ -58,7 +58,7 @@ In order to correct class imbalance that skewed model predictions, misses were d
 ## Model & Experiments
 ### Model Architecture
 
-Contructing a TinyML model means navigating the inherent trade-off balance between classification accuracy and processing efficiency (Lin et al., 2020).
+Constructing a TinyML model means navigating the inherent trade-off balance between classification accuracy and processing efficiency (Lin et al., 2020).
 
 To determine the optimal model for my device, I initially experimented with three architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent all models from overfitting, a high dropout rate was used between dense layers and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
 
