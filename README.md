@@ -19,6 +19,9 @@ Gathering statistics from regular shooting drills is a key way that basketball p
 
 This project, Swish, overcomes these problems by using machine learning to classify shots based on the sound of ball-basket interactions. By using audio, Swish bypasses the need for invasive filming or wearable hardware, providing a portable device that can be placed discretely under the rim, leaving the athlete to focus on their shot.
 
+## Application Overview
+The Swish system employs an edge machine learning architecture to classify shot audio locally in real-time. The hardware is lightweight and pocket-sized, consisting of an Arduino Nano 33 BLE Sense secured to a portable battery (Figure 1). Audio is continuously captured and partitioned using a a 0.5-second inference stride and a 1.5-second sliding window to capture both the rim-impact of a shot and the subsequent bounce, as both are indicative of shot outcome.
+
 <div align="center">
 
 <img src="report_figures/dual_swish_diagram.png" alt="Overview of Swish showing both court placement and hardware close-up." width="100%">
@@ -27,40 +30,37 @@ This project, Swish, overcomes these problems by using machine learning to class
 
 **Figure 1.** _The Swish shot tracker. **(A)** Deployment context. Positioning of the Swish sensor on the ground behind the court perimeter, beneath the hoop is shown. As well as the primary acoustic target zone (rim and net) and the downward propagation of sound to the microphone **(B)** Close-up of the assembled prototype detailing the components: (a) the **Arduino Nano 33 BLE Sense microcontroller**, (b) the **5V rechargeable battery**, (c) the **MP34DT05 microphone**, (d) the **RGB LED**, (e) the **custom fabric securement sleeve**, and (f) the **USB power cord** connecting the battery supply to the board._
 
-## Application Overview
-The Swish system employs an edge machine learning architecture to process audio locally in real-time. The hardware is lightweight and pocket-sized, consisting of an Arduino Nano 33 BLE Sense secured to a portable battery. Audio is continuously captured and partitioned using a 1.5-second sliding window with a 0.5-second inference stride. 
-
-Each window is processed through a Mel-filterbank energy (MFE) digital signal processing (DSP) block to convert the audio data into a 2D feature map. This is then passed to a quantised Convolutional Neural Network (CNN) classifier, which generates confidence scores for three target classes: make, miss, and noise. An algorithm then identifies the class with the highest score that exceeds the precision-recall tuned confidence threshold. If the window is classified as noise, the device continues listening. However, if a make or a miss is detected, then the respective event is recorded and a 2-second refractory period is initiated to prevent duplicate classifications. The onboard RGB LED then changes from blue, which indicates the device is listening, to red for a miss or green for a make. Shooting statistics are stored in local memory. This data can then be retrieved at the end of a session by connecting via a Bluetooth Low Energy (BLE) UART text interface that links the user's smartphone to the device using the Serial Bluetooth Terminal app.
+Each window is processed through a Mel-filterbank energy (MFE) digital signal processing block to convert the audio data into a Mel-spectrogram. This is passed to a quantised Convolutional Neural Network (CNN) classifier, which generates confidence scores for three target classes: make, miss, and noise. An algorithm then identifies the class with the highest score that exceeds the precision-recall tuned confidence threshold. If the window is classified as noise, the device continues listening. However, if a make or a miss is detected, then the respective event is recorded and a 2-second refractory period is initiated to prevent duplicate classifications. The onboard RGB LED then changes from blue, which indicates the device is listening, to red for a miss or green for a make. Shooting statistics are stored in local memory. This data can then be retrieved at the end of a session by connecting via a Bluetooth Low Energy (BLE) UART text interface that links the user's smartphone to the device using the Serial Bluetooth Terminal app.
 
 ![Block diagram showing the flow of data through the Swish system](report_figures/swish_application_graphic.png)
 
 **Figure 2.** *The Swish system architecture and data processing pipeline.*
 
 ## Data
-Due to a scarcity of online datasets for acoustic basketball shot classification, a custom dataset was recorded. This ensured training data was tailored to the intended device deployment by recording from ground-level underneath the backboard.
+To ensure training data was tailored to the intended device deployment, a custom dataset was recorded, matching device deployment conditions.
 
-Initial data collection using the Arduino and Edge Impulse's (EI) labelling feature was abandoned due to 20-second recording limits and EI's inefficient labelling workflow. Instead, continuous shooting sessions that included a diverse range of shots were recorded. To mimic the Arduino mic's acoustic profile, the RecForge app was used to disable automatic gain control and record through a single mic the and files were downsampled to 16 kHz and augmented with artificial noise on EI.
+Initial data collection using the Arduino and Edge Impulse's (EI) labelling feature was abandoned due to 20-second recording limits and EI's inefficient labelling workflow. Instead, continuous shooting sessions that included a diverse range of shots were recorded on a smartphone. To mimic the Arduino mic's acoustic profile, the RecForge app was used to disable automatic gain control and record through a single mic the and files were downsampled to 16 kHz and augmented with artificial noise on EI.
 
-To streamline annotation, delayed audio-tagging was used, whereby the class label was stated aloud following a pause after each shot. In Audacity, 1.5 second windows were labelled and audio tags removed to extract 1,509 data points total, including 353 makes, 572 misses and 584 background noise windows. 
+To streamline annotation, delayed audio-tagging was used, whereby class labels were stated aloud following a pause after each shot. In Audacity, 1.5 second windows were labelled and audio tags removed (Figure 3) to extract 1,509 data points total, including 353 makes, 572 misses and 584 background noise windows. 
 
 ![Image showing Audacity labelling system](report_figures/audacity_casa_diag.png)
 
-**Figure 3.** *Audacity workspace demonstrating the manual audio annotation workflow. Over 2.5 hours of continuous raw shooting audio was segmented into discrete class windows using this method. Noise segments were intentionally left longer, allowing the  Impulse pipeline to automatically partition them into multiple 1.5-second windows.*
+**Figure 3.** *Audacity workspace demonstrating the manual audio annotation workflow. Over 2.5 hours of continuous raw shooting audio was segmented into discrete class windows using this method. Noise segments were intentionally left longer, allowing the EI pipeline to automatically partition them into multiple 1.5-second windows.*
 
-In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were then processed in EI into MFE feature maps ready for model training.
+In order to correct class imbalance that skewed model predictions, misses were down-sampled to match the exact number of makes. Audio windows were processed in EI into exact 1.5 second windows and Mel-spectrograms, ready for model training (Figure 4).
 
 <div align="center">
   <img src="report_figures/shot_MFE_spectrograms_diagram.png" alt="Diagram showing MFE spectrograms of different shots" width="60%">
 </div>
 
-**Figure 4.** *MFE spectrograms illustrating the distinct acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
+**Figure 4.** *Mel-spectrograms illustrating the acoustic profiles of a clean swish, an unclean make, a miss and background noise (ball bouncing) over a 1.5-second sample window.*
 
 ## Model & Experiments
 Constructing a TinyML model means navigating the inherent trade-off balance between classification accuracy and processing efficiency (Lin et al., 2020).
 
 ### Model Architecture
 
-To determine the optimal model for my device, I initially experimented with three architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent all models from overfitting, a high dropout rate was used between dense layers and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
+To determine the optimal model for my device, I initially experimented with three architectures: a standard Dense Neural Network (DNN), a 1D Convolutional Neural Network (CNN), and a 2D CNN (Table 1). To prevent models from overfitting, a high dropout rate was used and noise injection and time-masking were employed to artificially expand the variance of the training dataset.
 
 <div align="center">
 
@@ -68,15 +68,15 @@ To determine the optimal model for my device, I initially experimented with thre
 | :--- | :--- | :--- | :--- | :--- |
 | **Dense (DNN)** | 60.3% | 53.38% | 0.53 | 10 ms |
 | **1D CNN** | 86.4% | 78.70% | 0.91 | 13 ms |
-| **2D CNN** | 87.7% | 83.46% | 0.92 | 144 ms |
+| **2D CNN** | 87.7% | 83.46% | 0.92 | 306 ms |
 
 </div>
 
-**Table 1.** *Performance metrics across neural network architectures.*
+**Table 1.** *Performance metrics across neural network architectures. See logs and screenshots in experiment_logs_and_outputs*
 
-The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. [could include why] However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 306 ms. 
+The DNN performed poorly, achieving only 53.38% test accuracy, likely because flattening the spectrogram destroyed the spatial information required to distinguish between classes. The CNNs performed significantly better, with the 2D architecture slightly outperforming the 1D model across all evaluation metrics. The 1D CNN exhibited a notably lower test accuracy, which confusion matrix analysis revealed was primarily driven by a higher proportion of 'uncertain' classifications compared to 2D. However, the 1D CNN was significantly more efficient, executing inference in just 13 ms compared to the 2D CNN at 306 ms. 
 
-Navigating this accuracy-latency trade-off required prioritizing the specific functionality of the application. To operate effectively as a shot tracker, Swish must have a high classification accuracy to reliably capture the minute, incremental improvements a player makes to their shooting percentage over time. As a result, the 1D architecture was deemed insufficiently accurate for the use case and it was decided that the 2D CNN should be used, so long as further system optimisation could ensure total latency remained below the 500 ms inference stride.
+Navigating this accuracy-latency trade-off required prioritizing the specific functionality of the application. To operate effectively as a shot tracker, Swish must have a high classification accuracy to reliably capture the minute, incremental improvements a player makes to their shooting percentage over time. As a result, the 1D architecture was deemed insufficiently accurate for the use case and it was decided that the 2D CNN should be used so long as further system optimisation could ensure total latency remained below the 500 ms inference stride.
 
 ###  Optimisation
 
@@ -87,7 +87,7 @@ To resolve this, three experiments were run to evaluate the effect of downgradin
 2. Reducing the temporal resolution
 3. Reducing the DSP frequency resolution
 
-Downgrading these parameters reduces the computational load of feature extraction and shrinks the output spectrogram dimensions, creating a subsequent reduction in downstream inference latency. However, it also reduces model accuracy.
+Downgrading these parameters reduces the computational load of feature extraction and shrinks spectrogram resolution, creating a subsequent reduction in downstream inference latency. However, it also reduces model accuracy.
 
 <div align="center">
 
@@ -100,17 +100,17 @@ Downgrading these parameters reduces the computational load of feature extractio
 
 </div>
 
-**Table 2.** *Impact of MFE processing block optimizations on system latency and test accuracy.*
+**Table 2.** *Impact of MFE processing block optimizations on system latency and test accuracy. See logs and screenshots in experiment_logs_and_outputs*
 
 Downsampling to 8KHz provided a negligible latency improvement, while degrading accuracy. Conversely, decreasing the temporal resolution by doubling the frame stride successfully reduced total latency to below 500 ms at 481 ms, but had significantly reduced accuracy (76.60%).
 
-Ultimately, the DSP resolution downgrade was selected as the optimal deployment configuration. By reducing the number of mel-filters to 20 and halving the FFT length to 256, the vertical frequency resolution of the spectrogram was compressed. This achieved a total latency of 491 ms, while retaining a high test accuracy (79.20%).
+Ultimately, the DSP resolution downgrade was selected as the optimal deployment configuration. By halving the number of mel-filters and the FFT length, the vertical frequency resolution of the spectrogram was compressed, achieving a total latency of 491 ms, while retaining a high test accuracy (79.20%).
 
 ### Real-World Validation
 
 To evaluate the model on-device, a 150-shot data set including 50 noise, 50 miss and 50 make events was collected. While the model accuracy in this deployment test decreased to 67.3%, results showed that the sensor was robust to background noise with a 95.9% true negative rate (Figure 5). Furthermore, when the model detected a shot, it successfully distinguished between makes and misses, with an average misclassification rate of only 9%.
 
-However, there was a significant false-negative rate, with over a third of valid shot events (36% of Makes and 38% of Misses) incorrectly classified as noise. This failure is primarily attributed to environmental domain shift. The training dataset was recorded over 3 windy afternoons, with one falling on the same day as the London Marathon, only 100 meters away. This likely embedded a high ambient noise floor so when the model was deployed on a quiet, low-wind day, the quieter swish and rim sounds failed to overcome inference thresholds, causing the model to incorrectly default to noise classifications.
+However, there was a significant false-negative rate, with over a third of valid shot events (36% of makes and 38% of misses) incorrectly classified as noise. This failure is primarily attributed to environmental domain shift. The training dataset was recorded over 3 windy afternoons, with one falling on the same day as the London Marathon, only 100 meters away. This likely embedded a high ambient noise floor so when the model was deployed on a quiet, low-wind morning, the fainter swish and rim sounds failed to overcome inference thresholds, causing the model to incorrectly default to noise classifications.
 
 <div align="center">
   <img src="report_figures/deployment_test_confusion_matrix.png" alt="Deployment test confusion matrix" width="70%">
