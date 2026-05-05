@@ -39,7 +39,7 @@ Each window is processed through a Mel-filterbank energy (MFE) digital signal pr
 ## Data
 Due to a scarcity of online datasets for acoustic basketball shot classification, a custom dataset was recorded. This ensured training data was tailored to the intended device deployment by recording from ground-level underneath the backboard.
 
-Initial data colelction using the Arduino and Edge Impulse's (EI) labelling feature was abandoned due to 20-second recording limits and EI's inefficient labelling workflow. Instead, continuous shooting sessions that included a diverse range of shots were recorded. To mimic the Arduino mic's acoustic profile, the RecForge app was used to disable automatic gain control and record through a single mic the and files were downsampled to 16 kHz and augmented with artifical noise on EI.
+Initial data collection using the Arduino and Edge Impulse's (EI) labelling feature was abandoned due to 20-second recording limits and EI's inefficient labelling workflow. Instead, continuous shooting sessions that included a diverse range of shots were recorded. To mimic the Arduino mic's acoustic profile, the RecForge app was used to disable automatic gain control and record through a single mic the and files were downsampled to 16 kHz and augmented with artificial noise on EI.
 
 To streamline annotation, delayed audio-tagging was used, whereby the class label was stated aloud following a pause after each shot. In Audacity, 1.5 second windows were labelled and audio tags removed to extract 1,509 data points total, including 353 makes, 572 misses and 584 background noise windows. 
 
