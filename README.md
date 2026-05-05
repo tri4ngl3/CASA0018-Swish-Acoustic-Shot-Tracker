@@ -4,7 +4,7 @@
 
 # Acoustic Classification of Basketball Shots using TinyML
 
-**Author**: Elliot Hills
+**Author**: Elliot Hills (WXWX9)
 
 **Edge Impulse:** https://studio.edgeimpulse.com/public/979083/latest
 
