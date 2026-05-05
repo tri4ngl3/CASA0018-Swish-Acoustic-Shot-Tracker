@@ -112,16 +112,10 @@ To evaluate the model in once deployed, a 150-shot data set including 50 noise, 
 However, there was significant false-negative rate, with over a third of valid shot events (36% of Makes and 38% of Misses) incorrectly classified as noise. This failure is primarily attributed to environmental domain shift. The training dataset was recorded over 3 windy afternoons, with one falling on the same day as the London Marathon, only 100 meters away. This likely embedded a high ambient noise floor so when the model was deployed on a quiet, low-wind day, the quieter swish and rim sounds failed to overcome inference thresholds, causing the model to incorrectly default to noise classifications.
 
 <div align="center">
-
-| | Predicted: Make | Predicted: Miss | Predicted: Noise |
-| :--- | :--- | :--- | :--- |
-| **Actual: Make** | 🟩 *[XX]* | 🟥 *[XX]* | 🟥 *[XX]* |
-| **Actual: Miss** | 🟥 *[XX]* | 🟩 *[XX]* | 🟨 *[XX]* |
-| **Actual: Noise**| 🟥 *[XX]* | 🟨 *[XX]* | 🟩 *[XX]* |
-
+  <img src="report_figures/deployment_test_confusion_matrix.png" alt="Deployment test confusion matrix" width="70%">
 </div>
 
-**Table 3.** *Confusion matrix of the real-world classification performance across 100 acoustic events.*
+**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events.*
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
