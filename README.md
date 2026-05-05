@@ -115,7 +115,7 @@ However, there was significant false-negative rate, with over a third of valid s
   <img src="report_figures/deployment_test_confusion_matrix.png" alt="Deployment test confusion matrix" width="70%">
 </div>
 
-**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events.*
+**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events. Results processed using deployment_test.py*
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
