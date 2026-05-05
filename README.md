@@ -116,7 +116,7 @@ However, there was a significant false-negative rate, with over a third of valid
   <img src="report_figures/deployment_test_confusion_matrix.png" alt="Deployment test confusion matrix" width="70%">
 </div>
 
-**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events. Results processed using experiment_logs_and_outputs/deployment_test.py*
+**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events. Results are in experiment_logs_and_outputs/deployment_test.csv and were processed using experiment_logs_and_outputs/deployment_test.py in Google Collab.*
 
 ## Discussion and Conclusion
 
@@ -128,7 +128,7 @@ Another factor currently limiting the applicability of Swish is the inability fo
 
 Additionally, while device build provided adequate short-term durability as a prototype, a weatherproof, impact-resistant enclosure is necessary for longer-term use. Future iterations could also integrate a companion app, mapping shot statistics to court locations, elevating Swish from a shot tracker to a training tool.
 
-Despite these limitation, this project provides a proof-of-concept to show that edge-based acoustic classification is a viable alternative to existing shot tracking technologies and demonstrates a user-friendly pipeline for its implementation.
+Despite these limitations, this project provides a proof-of-concept to show that edge-based acoustic classification is a viable alternative to existing shot tracking technologies and demonstrates a user-friendly pipeline for its implementation.
 
 ## Bibliography
 1. Cleary, T. J., & Zimmerman, B. J. (2001). Self-regulation differences during athletic practice by experts, non-experts, and novices. Journal of applied sport psychology, 13(2), 185-206.
@@ -148,4 +148,4 @@ I, Elliot Hills, confirm that the work presented in this assessment is my own. W
 
 05/05/2026 (DAP used)
 
-Word count: 
+Word count: 1489
