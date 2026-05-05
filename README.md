@@ -115,46 +115,37 @@ However, there was significant false-negative rate, with over a third of valid s
   <img src="report_figures/deployment_test_confusion_matrix.png" alt="Deployment test confusion matrix" width="70%">
 </div>
 
-**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events. Results processed using deployment_test.py*
+**Figure 5.** *Confusion matrix of the real-world classification performance across 150 acoustic events. Results processed using experiment_logs_and_outputs/deployment_test.py*
 
-## Results and Observations
-Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
+## Discussion
 
-*Tip: probably ~300 words and remember images and diagrams bring results to life!*
+The Swish device serves as a viable proof-of-concept for the application of TinyML to basketball shot tracking using audio. Achieving a 79.2% model test accuracy and a 67.3% deployment accuracy - despite a limited dataset and domain shift in the real-world test - validates the ability of edge models to acoustically differentiate basketball shot outcomes. Furthermore the Swish system functioned smoothly in deployment with latency challenges navigated effectively. The bluetooth stats retrieval and RGB LED live shot-classification also proved successful making Swish an intuitive, user-friendly device.
+
+However, for this device to graduate from a prototype to a commercial device that is fit-for-purpose, accuracy must be improved greatly if it is to track the minute FG% changes that occur from session-to-session as basketball players improve their shot. This of course can be addressed by gathering significantly more data, however the domain shift identified in deployment also highlighted the need for greater diversity in training data. By collecting further data from diverse environments with a variety of background nosie levels and types and from court variations (e.g. chain nets, indoor courts, different backboards) future model iterations will be more robust and widely applicable for use in the real world.
+
+Another pitfall that limits Swish's broader appilcability is the inability for the model to track shots that neither make contact with the rim nor the net. Although these are uncommon in the intended use-case of regular shooting drills, they can occur, especially from beginners. Detecting these 'airballs' purely acoustically is perhaps an insurmountable challenge, as without an impact sound they are indistinguishable from background ball bounces. This also applies to rims without nets, which are common in many public outdoor courts. Expanding the Swish system to include these shots may require multi-modal sensor fusion such as a rim-attachable motion sensor.  
+
+Furthermore, while device build provided adequate short-term durability as a prototype, a weatherproof, impact-resistant 3D-printed enclosure is necessary for longer-term use. Finally, the system's utility could be  enhanced by developing a companion app to allow players to map their shooting percentages to specific court locations by following preset drills, elevating Swish to a training tool.
 
 ## Conclusion
-Wrap it up, summarising key findings.
-
-*Tip: probably ~100 words*
+This project successfully developed and deployed Swish, a TinyML-powered acoustic shot tracker. The system achieved a 79.2% test accuracy and a 67.3% accuracy in real-world testing. It demonstrated a robust 95.9% rejection rate for background noise and successfully distinguished between makes and misses. While environmental domain shift highlighted the need for a more diverse, multi-court training dataset, the prototype showed that edge-based acoustic classification is a viable, alternative to existing shot tracking technologies and demostrated a user-friendly pipeline for its implementation.
 
 ## Bibliography
-*If you added any references then add them in here using this format:*
-
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
-
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
-
-https://www.fatherly.com/gear/shottracker-wearable-basketball-sensor
-https://www.homecourt.ai/
-https://www.ballogy.com/
-
-Cleary, T. J., & Zimmerman, B. J. (2001). Self-regulation differences during athletic practice by experts, non-experts, and novices. Journal of applied sport psychology, 13(2), 185-206.
-Sandbrook, C., Luque-Lora, R., & Adams, W. M. (2018). Human bycatch: Conservation surveillance and the social implications of camera traps. Conservation and Society, 16(4), 493-504.
-Moreira, P. E. D., Dieguez, G. T. D. O., Bredt, S. D. G. T., & Praça, G. M. (2021). The acute and chronic effects of dual-task on the motor and cognitive performances in athletes: a systematic review. International journal of environmental research and public health, 18(4), 1732.
-Li, S., & Zhang, W. (2022). Evaluation Method of Basketball Teaching and training effect based on Wearable device. Frontiers in Physics, 10, 900169.
-Lin, J., Chen, W. M., Lin, Y., Gan, C., & Han, S. (2020). Mcunet: Tiny deep learning on iot devices. Advances in neural information processing systems, 33, 11711-11722.
-
-*Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
+1. Cleary, T. J., & Zimmerman, B. J. (2001). Self-regulation differences during athletic practice by experts, non-experts, and novices. Journal of applied sport psychology, 13(2), 185-206.
+2. Li, S., & Zhang, W. (2022). Evaluation Method of Basketball Teaching and training effect based on Wearable device. Frontiers in Physics, 10, 900169.
+3. Lin, J., Chen, W. M., Lin, Y., Gan, C., & Han, S. (2020). Mcunet: Tiny deep learning on iot devices. Advances in neural information processing systems, 33, 11711-11722.
+4. Moreira, P. E. D., Dieguez, G. T. D. O., Bredt, S. D. G. T., & Praça, G. M. (2021). The acute and chronic effects of dual-task on the motor and cognitive performances in athletes: a systematic review. International journal of environmental research and public health, 18(4), 1732.
+5. Sandbrook, C., Luque-Lora, R., & Adams, W. M. (2018). Human bycatch: Conservation surveillance and the social implications of camera traps. Conservation and Society, 16(4), 493-504.
 
 ----
 
 ## Declaration of Authorship
 
-I, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+I, Elliot Hills, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
 
 
-*Digitally Sign by typing your name here*
+*Elliot Hills*
 
-ASSESSMENT DATE
+05/05/2026 (DAP used)
 
 Word count: 
